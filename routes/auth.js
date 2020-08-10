@@ -18,4 +18,17 @@ route.get(
     }
 )
 
+
+// @desc  logout user
+// @route /auth/logout
+
+route.get('/logout', (req, res) => {
+    req.logOut()
+    res.redirect('/')
+})
+
+
+
+
+
 module.exports = route

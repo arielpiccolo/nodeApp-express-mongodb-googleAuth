@@ -4,6 +4,7 @@
         "crossorigin",
         "exphbs",
         "mucha",
-        "resave"
+        "resave",
+        "sidenav"
     ]
 }
