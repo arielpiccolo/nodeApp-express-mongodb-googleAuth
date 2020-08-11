@@ -1,6 +1,7 @@
 // imports and setting
 
 const express = require('express');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
 // morgan handle login
@@ -8,6 +9,8 @@ const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session');
+// session support stored in mongodb
+const MongoStore = require('connect-mongo')(session);
 const connectDB = require('./config/db');
 
 // load config file
@@ -38,6 +41,8 @@ app.use(session({
     secret: 'mucha caca',
     resave: false,
     saveUninitialized: false,
+    // login session stored in mongodb (MongoStore)
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 
 

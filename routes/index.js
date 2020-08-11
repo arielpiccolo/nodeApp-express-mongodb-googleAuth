@@ -1,10 +1,12 @@
 const express = require('express');
 const route = express.Router();
+const { ensureAuth, ensureGuest } = require('../middleware/auth')
 
 
-// @desc  Login/Landing page
+// @desc  Login/Landing page (ensureGuest)
 // @route GET /
-route.get('/', (req, res) => {
+// guests can see the login page
+route.get('/', ensureGuest, (req, res) => {
 
     //  lets declare the specific layout we are using for the login page.
     res.render('login', {
@@ -15,7 +17,8 @@ route.get('/', (req, res) => {
 
 // @desc  Dashboard
 // @route GET / dashboard
-route.get('/dashboard', (req, res) => {
+// only logged in users can see this page(ensureAuth)
+route.get('/dashboard', ensureAuth, (req, res) => {
     res.render('dashboard')
 });
 
