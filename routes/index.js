@@ -2,6 +2,8 @@ const express = require('express');
 const route = express.Router();
 const { ensureAuth, ensureGuest } = require('../middleware/auth')
 
+const Story = require('../models/Story')
+
 
 // @desc  Login/Landing page (ensureGuest)
 // @route GET /
@@ -18,8 +20,22 @@ route.get('/', ensureGuest, (req, res) => {
 // @desc  Dashboard
 // @route GET / dashboard
 // only logged in users can see this page(ensureAuth)
-route.get('/dashboard', ensureAuth, (req, res) => {
-    res.render('dashboard')
+route.get('/dashboard', ensureAuth, async (req, res) => {
+
+    // lean below is to use plain JS instead of a mongoose document
+    try {
+        // limit all stories to the logged user
+        const stories = await Story.find({ user: req.user.id  }).lean()
+        res.render('dashboard', {
+            name: req.user.firstName,
+            stories
+        })
+
+    } catch (err) {
+        console.log(err)
+        res.render('error/500')
+    }
+
 });
 
 
