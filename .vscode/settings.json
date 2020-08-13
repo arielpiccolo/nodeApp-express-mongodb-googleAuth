@@ -1,10 +1,13 @@
 {
     "cSpell.ignoreWords": [
         "awsome",
+        "basicstyles",
+        "ckeditor",
         "crossorigin",
         "exphbs",
         "mucha",
         "resave",
-        "sidenav"
+        "sidenav",
+        "wysiwygarea"
     ]
 }
