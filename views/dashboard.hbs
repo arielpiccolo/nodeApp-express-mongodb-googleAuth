@@ -4,6 +4,28 @@
 <p>Here are all your stories.</p>
 
 {{#if stories}}
+<table>
+
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each stories}}
+        <tr>
+            <td>
+            <td> <a href="/stories/{{_id}}"></a>{{title}}</td>
+            <td>{{createdAt}}</td>
+            <td><span class="dash-status">{{status}}</span></td>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
 
 {{else}}
 <p>You have not create any stories</p>
